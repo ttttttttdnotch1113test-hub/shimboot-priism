@@ -21,8 +21,17 @@ jobs:
           remove-dotnet: 'true'
           remove-android: 'true'
           remove-haskell: 'true'
-          large-packages: 'true'
-          swap-storage: 'true'
+          remove-codeql: 'true'
+          remove-docker-images: 'true'
+
+      - name: Aggressive Tool Cache Cleanup
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          df -h
 
       - name: download repo
         uses: actions/checkout@v4
